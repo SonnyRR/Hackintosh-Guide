@@ -25,6 +25,8 @@ The default Clover settings are pretty overdone and can cause some issues. We'll
         <dict>
             <key>Fixes</key>
             <dict>
+                <key>AddMCHC</key>
+                <true/>
                 <key>FixHPET</key>
                 <true/>
                 <key>FixIPIC</key>
@@ -108,9 +110,9 @@ The default Clover settings are pretty overdone and can cause some issues. We'll
 
 ### Clover Configurator Screenshots
 
-![Skylake Acpi CC Section 1](../.gitbook/assets/image%20%2858%29.png)
+![Skylake Acpi CC Section 1](../.gitbook/assets/image%20%2847%29.png)
 
-![Skylake Acpi CC Section 2](../.gitbook/assets/image%20%2848%29.png)
+![Skylake Acpi CC Section 2](../.gitbook/assets/image%20%2858%29.png)
 
 ### Explanation
 
@@ -163,7 +165,7 @@ We don't need to do _too much_ here, but we'll tweak a few things.
 
 ### Clover Configurator Screenshots
 
-![Skylake Boot CC Section](../.gitbook/assets/image%20%2816%29.png)
+![Skylake Boot CC Section](../.gitbook/assets/image%20%2820%29.png)
 
 ### Explanation
 
@@ -238,7 +240,7 @@ We'll handle some slick property injection for _WhateverGreen_ here, and do some
 
 ### Clover Configurator Screenshots
 
-![Skylake Devices CC Section - iGPU](../.gitbook/assets/image%20%2855%29.png)
+![Skylake Devices CC Section - iGPU](../.gitbook/assets/image%20%2865%29.png)
 
 ![Skylake Devices CC Section - iGPU Connectorless](../.gitbook/assets/image.png)
 
@@ -298,7 +300,7 @@ We have nothing to do here.
 
 ### Clover Configurator Screenshots
 
-![Skylake Gui CC Section](../.gitbook/assets/image%20%2851%29.png)
+![Skylake Gui CC Section](../.gitbook/assets/image%20%2861%29.png)
 
 ### Explanation
 
@@ -458,7 +460,7 @@ In the past, we'd setup the iGPU here, but since we already did that via Propert
 
 ### Clover Configurator Screenshots
 
-![Skylake KernelAndKextPatches CC Section](../.gitbook/assets/image%20%2814%29.png)
+![Skylake KernelAndKextPatches CC Section](../.gitbook/assets/image%20%2818%29.png)
 
 ### Explanation
 
@@ -508,13 +510,13 @@ You'll notice that there are MatchOS values set for each of the USB port limit p
 
 ### Clover Configurator Screenshots
 
-![Skylake RtVariables CC Section](../.gitbook/assets/image%20%2831%29.png)
+![Skylake RtVariables CC Section](../.gitbook/assets/image%20%2837%29.png)
 
-![Skylake SMBIOS CC Section](../.gitbook/assets/image%20%289%29.png)
+![Skylake SMBIOS CC Section](../.gitbook/assets/image%20%2812%29.png)
 
 ### Explanation
 
-For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/Plist-Tool) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow Clover to fill in the blanks; this means that updating Clover will update the info passed, and not require you to also update your config.plist.
+For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow Clover to fill in the blanks; this means that updating Clover will update the info passed, and not require you to also update your config.plist.
 
 For this Skylake example, I chose the _iMac17,1_ SMBIOS.
 
@@ -549,7 +551,7 @@ The `Serial` part gets copied to _SMBIOS -&gt; Serial Number._
 
 The `Board Serial` part gets copied to _SMBIOS -&gt; Board Serial Number_ as well as _Rt Variables -&gt; MLB._
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my _Plist-Tool_ script\) - and that gets copied to _SMBIOS -&gt; SmUUID_.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my _GenSMBIOS_ script\) - and that gets copied to _SMBIOS -&gt; SmUUID_.
 
 We set _Rt Variables -&gt; ROM_ to `UseMacAddr0` which just utilizes our onboard Mac address - this should be unique enough to not conflict with any others.
 
@@ -575,7 +577,7 @@ _BooterConfig_ gets set to `0x28`, and _CsrActiveConfig_ is set to `0x3e7` which
 
 ### Clover Configurator Screenshots
 
-![System Parameters CC Section](../.gitbook/assets/image%20%2849%29.png)
+![System Parameters CC Section](../.gitbook/assets/image%20%2859%29.png)
 
 ### Explanation
 

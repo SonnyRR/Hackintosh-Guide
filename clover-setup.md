@@ -4,26 +4,26 @@
 
 Fire up your Clover install package. On the 2nd page of the installer **make sure to select your USB as the destination**. We also want to **Customize** the installation - as the defaults are pretty lackluster.
 
-![2nd Page of the Clover Installer - Note the &quot;Customize&quot; button in the bottom left](.gitbook/assets/image%20%2821%29.png)
+![2nd Page of the Clover Installer - Note the &quot;Customize&quot; button in the bottom left](.gitbook/assets/image%20%2826%29.png)
 
-The _usual_ options you want to check in the Customize menu are shown in the following screenshots with an explanation of each after:
+The _usual_ options you want to check in the Customize menu are shown in the following screenshots with an explanation of each after \(**Note**: any non-Z370 300-series board will need _EmuVariableUefi-64_ as well\):
 
-![UEFI Booting Only and Install in the ESP](.gitbook/assets/image%20%2813%29.png)
+![UEFI Booting Only and Install in the ESP](.gitbook/assets/image%20%2817%29.png)
 
-![ApfsDriverLoader and AptioMemoryFix under Drivers64UEFI](.gitbook/assets/image%20%2826%29.png)
+![ApfsDriverLoader and AptioMemoryFix under UEFI Drivers](.gitbook/assets/image%20%2832%29.png)
 
-![HFSPlus under Drivers64UEFI - although VboxHfs-64 works as well](.gitbook/assets/image%20%2843%29.png)
+![HFSPlus under UEFI Drivers - although VboxHfs-64 works as well](.gitbook/assets/image%20%2851%29.png)
 
 * _Install Clover for UEFI booting only_
 * _Install Clover to the ESP_
-* Under _Drivers64UEFI:_
+* Under _UEFI Drivers:_
   * _AptioMemoryFix_ \(the new hotness that includes NVRAM fixes, as well as better memory management\)
-  * _VBoxHfs-64.efi_ \(or _HFSPlus.efi_ if available\) - one of these is required for Clover to see and boot HFS+ volumes.  If you see the option to enable it in the installer, make sure it's selected - if you don't see it in the installer, verify that one of them exists in the _EFI -&gt; CLOVER -&gt; drivers64UEFI_ folder
+  * _VBoxHfs-64_ \(or _HFSPlus_ if available\) - one of these is required for Clover to see and boot HFS+ volumes.  If you see the option to enable it in the installer, make sure it's selected - if you don't see it in the installer, verify that one of them exists in the _EFI -&gt; CLOVER -&gt; drivers64UEFI_ folder
   * _ApfsDriverLoader_ - \(Available in Dids' Clover builds - or [here](https://github.com/acidanthera/ApfsSupportPkg/releases)\) this allows Clover to see and boot from APFS volumes by loading apfs.efi from ApfsContainer located on block device \(if using AptioMemoryFix as well, requires R21 or newer\)
 
 _**That's it.**_
 
-If you don't need FileVault, and are setting up a standard UEFI installation, these are the only entries you should need.  You may find more than the above selected in the _Drivers64UEFI_ section - feel free to deselect any not listed.  There are some that can even cause conflicts with other settings/kexts \(Like [_SMCHelper-64.efi_](https://github.com/acidanthera/VirtualSMC/blob/master/Docs/FAQ.md)\), so it's a good idea to run as lean as possible here.
+If you don't need FileVault, and are setting up a standard UEFI installation, these are the only entries you should need.  You may find more than the above selected in the _UEFI Drivers_ section - feel free to deselect any not listed.  There are some that can even cause conflicts with other settings/kexts \(Like [_SMCHelper-64.efi_](https://github.com/acidanthera/VirtualSMC/blob/master/Docs/FAQ.md)\), so it's a good idea to run as lean as possible here.
 
 ## Copying Kexts
 

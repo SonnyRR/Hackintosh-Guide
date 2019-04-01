@@ -25,6 +25,8 @@ The default Clover settings are pretty overdone and can cause some issues. We'll
         <dict>
             <key>Fixes</key>
             <dict>
+                <key>AddMCHC</key>
+                <true/>
                 <key>FixHPET</key>
                 <true/>
                 <key>FixIPIC</key>
@@ -64,6 +66,34 @@ The default Clover settings are pretty overdone and can cause some issues. We'll
                     <key>Replace</key>
                     <data>
                     RUgwMg==
+                    </data>
+                </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>change XHCI to XHC</string>
+                    <key>Disabled</key>
+                    <false/>
+                    <key>Find</key>
+                    <data>
+                    WEhDSQ==
+                    </data>
+                    <key>Replace</key>
+                    <data>
+                    WEhDXw==
+                    </data>
+                </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>change XHC1 to XHC</string>
+                    <key>Disabled</key>
+                    <false/>
+                    <key>Find</key>
+                    <data>
+                    WEhDMQ==
+                    </data>
+                    <key>Replace</key>
+                    <data>
+                    WEhDXw==
                     </data>
                 </dict>
                 <dict>
@@ -108,9 +138,9 @@ The default Clover settings are pretty overdone and can cause some issues. We'll
 
 ### Clover Configurator Screenshots
 
-![Haswell Acpi CC Section 1](../.gitbook/assets/image%20%288%29.png)
+![Haswell Acpi CC Section 1](../.gitbook/assets/image%20%2856%29.png)
 
-![Haswell Acpi CC Section 2](../.gitbook/assets/image%20%2817%29.png)
+![Haswell Acpi CC Section 2](../.gitbook/assets/image%20%286%29.png)
 
 ### Explanation
 
@@ -120,6 +150,8 @@ The first thing we'll go over is the _Patches_ section. This section allows us t
 
 * _change EHC1 to EH01 -_ helps avoid a conflict with built-in USB injectors
 * _change EHC2 to EH02_ - helps avoid a conflict with built-in USB injectors
+* _change XHC1 to XHC -_ helps avoid a conflict with built-in USB injectors
+* _change XHCI to XHC_ - helps avoid a conflict with built-in USB injectors
 * _change SAT0 to SATA_ - for potential SATA compatibility
 
 #### Fixes:
@@ -163,7 +195,7 @@ We don't need to do _too much_ here, but we'll tweak a few things.
 
 ### Clover Configurator Screenshots
 
-![Haswell Boot CC Section](../.gitbook/assets/image%20%2816%29.png)
+![Haswell Boot CC Section](../.gitbook/assets/image%20%2820%29.png)
 
 ### Explanation
 
@@ -230,11 +262,11 @@ We'll handle some slick property injection for _WhateverGreen_ here, and do some
 
 ### Clover Configurator Screenshots
 
-![Haswell Devices CC Section - iGPU](../.gitbook/assets/image%20%2836%29.png)
+![Haswell Devices CC Section - iGPU](../.gitbook/assets/image%20%2842%29.png)
 
-![Haswell Devices CC Section - iGPU \(Connectorless\) + dGPU](../.gitbook/assets/image%20%2819%29.png)
+![Haswell Devices CC Section - iGPU \(Connectorless\) + dGPU](../.gitbook/assets/image%20%2824%29.png)
 
-![Device-Id fake for HD 4400 --&amp;gt; HD 4600](../.gitbook/assets/image%20%285%29.png)
+![Device-Id fake for HD 4400 --&amp;gt; HD 4600](../.gitbook/assets/image%20%288%29.png)
 
 ### Explanation
 
@@ -319,7 +351,7 @@ We have nothing to do here.
 
 ### Clover Configurator Screenshots
 
-![Haswell Gui CC Section](../.gitbook/assets/image%20%2851%29.png)
+![Haswell Gui CC Section](../.gitbook/assets/image%20%2861%29.png)
 
 ### Explanation
 
@@ -479,7 +511,7 @@ In the past, we'd setup the iGPU here, but since we already did that via Propert
 
 ### Clover Configurator Screenshots
 
-![Haswell KernelAndKextPatches CC Section](../.gitbook/assets/image%20%2838%29.png)
+![Haswell KernelAndKextPatches CC Section](../.gitbook/assets/image%20%2845%29.png)
 
 ### Explanation
 
@@ -529,13 +561,13 @@ You'll notice that there are MatchOS values set for each of the USB port limit p
 
 ### Clover Configurator Screenshots
 
-![Haswell Rt Variables CC Section](../.gitbook/assets/image%20%2818%29.png)
+![Haswell Rt Variables CC Section](../.gitbook/assets/image%20%2823%29.png)
 
-![Haswell SMBIOS CC Section](../.gitbook/assets/image%20%2830%29.png)
+![Haswell SMBIOS CC Section](../.gitbook/assets/image%20%2836%29.png)
 
 ### Explanation
 
-For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/Plist-Tool) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow Clover to fill in the blanks; this means that updating Clover will update the info passed, and not require you to also update your config.plist.
+For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow Clover to fill in the blanks; this means that updating Clover will update the info passed, and not require you to also update your config.plist.
 
 For this Haswell example, I chose the _iMac15,1_ SMBIOS. The typical breakdown is as follows:
 
@@ -574,7 +606,7 @@ The `Serial` part gets copied to _SMBIOS -&gt; Serial Number._
 
 The `Board Serial` part gets copied to _SMBIOS -&gt; Board Serial Number_ as well as _Rt Variables -&gt; MLB._
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my _Plist-Tool_ script\) - and that gets copied to _SMBIOS -&gt; SmUUID_.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my _GenSMBIOS_ script\) - and that gets copied to _SMBIOS -&gt; SmUUID_.
 
 We set _Rt Variables -&gt; ROM_ to `UseMacAddr0` which just utilizes our onboard Mac address - this should be unique enough to not conflict with any others.
 
@@ -600,7 +632,7 @@ _BooterConfig_ gets set to `0x28`, and _CsrActiveConfig_ is set to `0x3e7` which
 
 ### Clover Configurator Screenshots
 
-![System Parameters CC Section](../.gitbook/assets/image%20%2833%29.png)
+![System Parameters CC Section](../.gitbook/assets/image%20%2839%29.png)
 
 ### Explanation
 
